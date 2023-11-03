@@ -26,11 +26,11 @@ class Webserver(commands.Cog):
         
         @routes.post('/shotgrid')
         async def shotgrid(request: web.Request) -> web.Response:
-            # raw = await request.read()
-            # hashcheck = "sha1=" + hmac.new(os.getenv('SHOTGRID_SECRET').encode(), raw, hashlib.sha1).hexdigest()
-            # if hashcheck != request.headers["x-sg-signature"]:
-            #     print("Error: hashes do not match")
-            #     return web.Response(body="", status=401)
+            raw = await request.read()
+            hashcheck = "sha1=" + hmac.new(os.getenv('SHOTGRID_SECRET').encode(), raw, hashlib.sha1).hexdigest()
+            if hashcheck != request.headers["x-sg-signature"]:
+                print("Error: hashes do not match")
+                return web.Response(body="", status=401)
             
             data = await request.json()
             pprint(data)
