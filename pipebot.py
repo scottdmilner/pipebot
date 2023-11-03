@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from pprint import pprint
 from cogs.webserver import Webserver
+from cogs.github import GithubCmds
 
 load_dotenv()
 
@@ -13,6 +14,7 @@ intents.members = True
 
 bot = commands.InteractionBot(intents=intents)
 bot.add_cog(Webserver(bot))
+bot.add_cog(GithubCmds(bot))
 
 @bot.event
 async def on_ready() -> None:
