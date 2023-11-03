@@ -9,16 +9,18 @@ import os
 
 load_dotenv()
 
+
 class PipeCategory(str, Enum):
-    Discord   = 'discord'
-    Farm      = 'renderfarm'
-    Houdini   = 'houdini'
-    Maya      = 'maya'
-    Nuke      = 'nuke'
-    Other     = 'other'
-    ShotGrid  = 'shotgrid'
-    Substance = 'substance'
-    Unreal    = 'unreal'
+    Discord = "discord"
+    Farm = "renderfarm"
+    Houdini = "houdini"
+    Maya = "maya"
+    Nuke = "nuke"
+    Other = "other"
+    ShotGrid = "shotgrid"
+    Substance = "substance"
+    Unreal = "unreal"
+
 
 class GithubCmds(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -30,11 +32,11 @@ class GithubCmds(commands.Cog):
     @commands.slash_command()
     async def bug_report(
         self,
-        inter: disnake.ApplicationCommandInteraction, 
+        inter: disnake.ApplicationCommandInteraction,
         category: PipeCategory,
         description: str,
         image1: disnake.Attachment = None,
-        image2: disnake.Attachment = None
+        image2: disnake.Attachment = None,
     ) -> None:
         """
         Report a bug to the pipeline team. Please be detailed!
@@ -48,6 +50,7 @@ class GithubCmds(commands.Cog):
         """
         pprint(inter.data)
         await inter.response.send_message("OK", ephemeral=True)
+
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(Github(bot))
