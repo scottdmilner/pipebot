@@ -1,8 +1,8 @@
 import disnake
-from disnake.ext import commands
 import os
+from disnake.ext import commands
 from dotenv import load_dotenv
-from pprint import pprint
+
 from cogs.webserver import Webserver
 from cogs.github import GithubCmds
 
