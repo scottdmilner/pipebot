@@ -3,8 +3,9 @@ import os
 from disnake.ext import commands
 from dotenv import load_dotenv
 
-from cogs.webserver import Webserver
+from cogs.avatars import AvatarRandomizer
 from cogs.github import GithubCmds
+from cogs.webserver import Webserver
 
 load_dotenv()
 
@@ -13,8 +14,11 @@ intents.message_content = True
 intents.members = True
 
 bot = commands.InteractionBot(intents=intents)
+bot.add_cog(AvatarRandomizer(bot))
+bot.add_cog(GithubCmds(bot))
 bot.add_cog(Webserver(bot))
 bot.add_cog(GithubCmds(bot))
+
 
 
 @bot.event

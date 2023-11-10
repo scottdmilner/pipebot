@@ -1,3 +1,5 @@
 .env
 __pycache__
 testdata.json
+profile_pics/*.png
+profile_pics/*.jpg
