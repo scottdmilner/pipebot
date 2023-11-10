@@ -1,10 +1,10 @@
-from disnake.ext import commands, tasks
 import disnake
-from aiohttp import web
-import os
-import hashlib
 import hmac
 import json
+import os
+from aiohttp import web
+from disnake.ext import commands, tasks
+from hashlib import sha1
 from dotenv import load_dotenv
 from pprint import pprint
 
@@ -30,9 +30,7 @@ class Webserver(commands.Cog):
             raw = await request.read()
             hashcheck = (
                 "sha1="
-                + hmac.new(
-                    os.getenv("SHOTGRID_SECRET").encode(), raw, hashlib.sha1
-                ).hexdigest()
+                + hmac.new(os.getenv("SHOTGRID_SECRET").encode(), raw, sha1).hexdigest()
             )
             if hashcheck != request.headers["x-sg-signature"]:
                 print("Error: hashes do not match")
@@ -55,7 +53,8 @@ class Webserver(commands.Cog):
     @web_server.before_loop
     async def web_server_before_loop(self) -> None:
         await self.bot.wait_until_ready()
-        # for some reason `get_channel` doesn't work but `fetch_channel does`
+
+        # for some reason `get_channel` doesn't work but `fetch_channel` does
         testing_channel = await self.bot.fetch_channel(os.getenv("TESTING_CHANNEL_ID"))
         if not isinstance(testing_channel, disnake.TextChannel):
             raise TypeError("Channel is invalid")
