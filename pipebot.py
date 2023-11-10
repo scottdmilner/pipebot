@@ -17,7 +17,6 @@ bot = commands.InteractionBot(intents=intents)
 bot.add_cog(AvatarRandomizer(bot))
 bot.add_cog(GithubCmds(bot))
 bot.add_cog(Webserver(bot))
-bot.add_cog(GithubCmds(bot))
 
 
 
